@@ -1,0 +1,28 @@
+1. CMake使用方法，将终端切换到当前目录下，在终端输入以下命令
+
+$ mkdir build
+$ cd build
+
+# 使用cmake对上一层文件夹（即代码所在文件夹）进行分析，使用make进行编译
+$ cmake ..
+$ make
+
+$ ./useGeometry
+
+# 清除中间文件夹build
+$ cd ..
+$ rm -rf build/
+
+
+
+2. G++使用方法，将终端切换到当前目录下，在终端输入以下命令
+
+# 编译主函数时调用共Eigen头文件(Eigen库只有头文件，没有库文件，所以无需添加库)
+# 编译生成一个可执行文件useEigen，-I参数指定包含头文件的目录
+$ g++ useGeometry.cpp -o useGeometry -I/usr/include/eigen3
+
+# 运行执行文件hello
+$ ./useGeometry
+
+# 清除执行文件hello
+$ rm useGeometry

@@ -1,0 +1,18 @@
+如何进行编译运行
+
+一、CMake方式
+在当前目录下打开终端，输入以下指令：
+mkdir build
+cd build
+cmake ..
+make     # 如果需要看到make构建的详细过程，可以使用make VERBOSE=1命令来进行构建
+./exetargetname
+执行完毕后可删除中间文件夹build
+cd ..
+rm -rf build
+
+二、g++方式
+g++ srccodename.cpp -o exetargetname -std=c++11 -I[example.hpp的路径] -lrealsense2  -lglfw -lGL -lGLU
+./exetargetname
+执行完毕后可删除执行对象
+rm exetargetname

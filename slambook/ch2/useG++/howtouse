@@ -1,0 +1,50 @@
+1. G++使用方法1（将引用的函数源文件与主函数源文件放在一起编译），将终端切换到当前目录下，在终端输入以下命令
+
+# 使用g++将函数文件编译成一个可执行文件hello
+$ g++ useG++.cpp funHelloSLAM.cpp funHelloWorld.cpp -o hello
+
+# 运行执行文件hello
+$ ./hello
+
+# 清除执行文件hello
+$ rm hello
+
+
+
+2. G++使用方法2（先将引用函数源文件编译成静态库文件，然后主函数进行调用），将终端切换到当前目录下，在终端输入以下命令
+
+# 将引用的函数源文件生成后缀名为.o的目标文件
+$ g++ -c funHelloWorld.cpp funHelloSLAM.cpp
+
+# 用生成静态库的命令ar将后缀名为.o的目标文件生成后缀名为.a静态库文件，生成的库文件应加lib前缀
+$ ar crv libmyFun.a funHelloWorld.o funHelloSLAM.o
+
+# 编译主函数时调用静态库文件，编译生成一个可执行文件hello
+# -L参数指定包含静态库文件的目录；-l指定静态库文件名，使用时不需要加lib前缀和.a后缀
+$ g++ useG++.cpp -o hello -L. -lmyFun 
+
+# 运行执行文件hello
+$ ./hello
+
+# 清除执行文件hello，静态库文件libmyFun.a，目标文件funHelloWorld.o、funHelloSLAM.o
+$ rm hello libmyFun.a funHelloWorld.o funHelloSLAM.o
+
+
+
+3. G++使用方法3（先将引用函数源文件编译成共享库文件，然后主函数进行调用），将终端切换到当前目录下，在终端输入以下命令
+
+# 通过-shared参数将引用的函数源文件生成后缀名为.so的共享库文件，生成的库文件应加lib前缀
+$ g++ funHelloWorld.cpp funHelloSLAM.cpp -fPIC -shared -o libmyFun.so
+
+# 暂时性添加共享库的查找路径，重启终端该查找路径失效
+$ export LD_LIBRARY_PATH=/home/myubuntu/Documents/Github/slambook_me/ch2/useG++
+
+# 编译主函数时调用共享库文件，编译生成一个可执行文件hello
+# -L参数指定包含共享库文件的目录；-l指定共享库文件名，使用时不需要加lib前缀和.so后缀
+$ g++ useG++.cpp -o hello -L. -lmyFun
+
+# 运行执行文件hello，运行该指令前可通过“ldd hello”指令测试是否动态链接全部找到
+$ ./hello       
+
+# 清除执行文件hello，共享库文件libmyFun.so
+$ rm hello libmyFun.so

@@ -1,0 +1,17 @@
+使用方法，将终端切换到当前目录下，在终端输入以下命令
+
+$ mkdir build
+$ cd build
+
+# 使用cmake对上一层文件夹（即代码所在文件夹）进行分析，使用make进行编译
+$ cmake ..
+$ make
+# 此处不知脑抽风还是咋回事，上述两条指令第一次运行报错，第二次运行才能通过
+
+$ cd ..                     # 返回上一层文件夹
+$ build/usePCL
+$ pcl_viewer map.pcd        # 用pcl提供的可视化程序打开这个文件
+
+# 清除中间文件夹build
+$ rm -rf build/
+$ rm map.pcd
